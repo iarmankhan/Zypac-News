@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "944150487764",
+    "firebase_url": "https://zypac-news.firebaseio.com",
+    "project_id": "zypac-news",
+    "storage_bucket": "zypac-news.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:944150487764:android:05838d672f6147786a5141",
+        "android_client_info": {
+          "package_name": "com.zypacnews"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "944150487764-cj0ej362t419l95hhl3a96f26npu8mke.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-DAGaLq3JUBjgiJ3Hq9mjJIAyibjVycw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "944150487764-cj0ej362t419l95hhl3a96f26npu8mke.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

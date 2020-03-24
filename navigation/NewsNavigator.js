@@ -10,6 +10,7 @@ const NewsStack = () => {
         <Stack.Navigator
             initialRouteName="Home"
             screenOptions={{
+                // headerShown: false,
                 gestureEnabled: true,
                 gestureDirection: 'horizontal',
                 headerStyle: {
@@ -22,9 +23,10 @@ const NewsStack = () => {
                 ...TransitionPresets.SlideFromRightIOS
             }}
             headerMode="float"
-
         >
-            <Stack.Screen name="Home" options={{title: 'Zypac News'}} component={NewsScreen} />
+            <Stack.Screen name="Home" options={{title: 'Zypac News'}} >
+                {(props) => <NewsScreen {...props} />}
+            </Stack.Screen>
             <Stack.Screen name="NewsDetails" options={{title: ''}} component={NewsDetailScreen} />
         </Stack.Navigator>
     )

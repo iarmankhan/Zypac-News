@@ -675,6 +675,11 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
+"@cryptoticket/react-native-push-notification@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@cryptoticket/react-native-push-notification/-/react-native-push-notification-1.1.0.tgz#6b7c008ddfa2f2d0fc2ac9fcc6396be4eecd0840"
+  integrity sha512-FxRQovZKHcOPGir/Mgx9r49Z1E1VQc6n4wN3cxbiDn1ZBwTulULJfbhOyOr9f2AOhJx3fjLruFDVMC96z6ltpg==
+
 "@egjs/hammerjs@^2.0.17":
   version "2.0.17"
   resolved "https://registry.yarnpkg.com/@egjs/hammerjs/-/hammerjs-2.0.17.tgz#5dc02af75a6a06e4c2db0202cae38c9263895124"
@@ -996,6 +1001,13 @@
     react-is "^16.13.0"
     shortid "^2.2.15"
     use-subscription "^1.4.0"
+
+"@react-navigation/material-top-tabs@^5.1.6":
+  version "5.1.6"
+  resolved "https://registry.yarnpkg.com/@react-navigation/material-top-tabs/-/material-top-tabs-5.1.6.tgz#b5c7c37b1273371630a191d58a0fbb7ad45a933f"
+  integrity sha512-vvBVfhHZH918Aap53tr08gTW0BjspHXM8KF97x1tNv3ncmckzCSaFLUO2DuvMS9VzYyFjd509YAYeZFOTvf2ZQ==
+  dependencies:
+    color "^3.1.2"
 
 "@react-navigation/native@^5.1.0":
   version "5.1.0"
@@ -5497,6 +5509,11 @@ react-native-screens@^2.3.0:
   integrity sha512-b+zazYedHPZoDzeKOE4RF/rPpJX8AAITazZCsVFUtw5Qn2QNHvAi0xbzWvQFNgqfvET0TLuu8F2HfBDh1WSqdQ==
   dependencies:
     debounce "^1.2.0"
+
+react-native-tab-view@^2.13.0:
+  version "2.13.0"
+  resolved "https://registry.yarnpkg.com/react-native-tab-view/-/react-native-tab-view-2.13.0.tgz#23037aa43b0f8f682ddc20415a4baaaf6f82ae8f"
+  integrity sha512-AeYbp/u91+D/C9+PmVEPBmFb3ixv8IkLMC3Sc5MajJ/fg0Zl3Of+BcEknBvTnKoe7Fj2y8+Qf9zorBbh5xzh4A==
 
 react-native@0.61.5:
   version "0.61.5"

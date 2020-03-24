@@ -1,4 +1,4 @@
-package com.awesomeproject;
+package com.zypacnews;
 
 import com.facebook.react.ReactActivity;
 

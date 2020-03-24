@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {ActivityIndicator, Button, FlatList, Image, StyleSheet, Text, View} from "react-native";
+import {ActivityIndicator, Button, FlatList, Text, View} from "react-native";
 import {connect} from "react-redux";
 import {fetchNews} from "../../store/News/News.action";
 import Colors from "../../constants/Colors";
@@ -8,7 +8,7 @@ import {selectLatestNews} from "../../store/News/News.selectors";
 import {newsStyles} from "./News.styles";
 import NewsItem from "../../components/NewsItem/NewsItem.component";
 
-class NewsScreen extends Component{
+class NewsScreen extends Component {
     constructor(props) {
         super(props);
 
@@ -19,6 +19,7 @@ class NewsScreen extends Component{
         };
 
         this.loadNews = this.loadNews.bind(this);
+        this.loadingNews = this.loadingNews.bind(this);
         this.selectNewsHandler = this.selectNewsHandler.bind(this)
     }
 
@@ -27,7 +28,7 @@ class NewsScreen extends Component{
 
         const {fetchNews} = this.props;
 
-        try{
+        try {
             await fetchNews();
         } catch (e) {
             this.setState({error: e.message});
@@ -42,11 +43,11 @@ class NewsScreen extends Component{
     loadingNews() {
         this.setState({isLoading: true});
         this.loadNews().then(() => {
-           this.setState({isLoading: false})
+            this.setState({isLoading: false})
         });
     }
 
-    selectNewsHandler(id){
+    selectNewsHandler(id) {
         this.props.navigation.navigate('NewsDetails', {
             newsId: id
         })
@@ -55,48 +56,48 @@ class NewsScreen extends Component{
     render() {
         const {error, isLoading, isRefreshing} = this.state;
         const {news} = this.props;
-        if(error){
+        if (error) {
             return (
                 <View style={newsStyles.centered}>
                     <Text>An error occurred!</Text>
-                    <Button title="Try again!" onPress={this.loadNews} color={Colors.primary} />
+                    <Button title="Try again!" onPress={this.loadNews} color={Colors.primary}/>
                 </View>
             )
         }
 
-        if(isLoading){
+        if (isLoading) {
             return (
                 <View style={newsStyles.centered}>
-                    <ActivityIndicator size="large" color={Colors.primary} />
+                    <ActivityIndicator size="large" color={Colors.primary}/>
                 </View>
             )
         }
 
-        if(!isLoading && news.length === 0 ){
+        if (!isLoading && news.length === 0) {
             return (
                 <View style={newsStyles.centered}>
                     <Text>No news found!</Text>
+                    <Button title="Try again!" onPress={this.loadNews} color={Colors.primary}/>
                 </View>
             )
         }
 
         return (
             <View>
-                {/*<Text>Latest News</Text>*/}
-            <FlatList
-                refreshing={isRefreshing}
-                onRefresh={this.loadNews}
-                data={news}
-                renderItem={itemData => (
-                    <NewsItem
-                        image={itemData.item.image}
-                        title={itemData.item.title}
-                        excerpt={itemData.item.excerpt}
-                        onSelect={() => this.selectNewsHandler(itemData.item.id)}
-                    />
-                )}
-                keyExtractor={item => item.id.toString()}
-            />
+                <FlatList
+                    refreshing={isRefreshing}
+                    onRefresh={this.loadNews}
+                    data={news}
+                    renderItem={itemData => (
+                        <NewsItem
+                            image={itemData.item.image}
+                            title={itemData.item.title}
+                            excerpt={itemData.item.excerpt}
+                            onSelect={() => this.selectNewsHandler(itemData.item.id)}
+                        />
+                    )}
+                    keyExtractor={item => item.id.toString()}
+                />
             </View>
         )
     }
@@ -106,7 +107,7 @@ const mapStateToProps = createStructuredSelector({
     news: selectLatestNews
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
     fetchNews: news => dispatch(fetchNews(news))
 });
 
