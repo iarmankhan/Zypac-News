@@ -20,9 +20,9 @@ const NewsItem = ({title, excerpt, image, onSelect}) => {
                 <Image source={{uri: image}} style={newsItemStyles.image} />
               </View>
               <View style={newsItemStyles.details}>
-                  <Text style={newsItemStyles.title}>{title}</Text>
+                  <Text style={newsItemStyles.title}>{title.substring(0, 50)}...</Text>
                   <View style={newsItemStyles.excerpt}>
-                    <HtmlView html={excerpt} />
+                    <HtmlView html={excerpt.substring(0, 100)} />
                   </View>
               </View>
             </View>

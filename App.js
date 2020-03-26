@@ -6,6 +6,8 @@ import {NavigationContainer} from "@react-navigation/native";
 import checkIfFirstLaunch from "./utils/checkIfFirstLaunch";
 import {registerFCMToken} from "./utils/registerFCMToken";
 import NewsStack from "./navigation/NewsNavigator";
+import NewsTabs from "./navigation/NewsTabNavigator";
+import Header from "./components/Header/Header.component";
 
 class App extends Component {
     state = {
@@ -25,7 +27,8 @@ class App extends Component {
         return (
             <Provider store={store}>
                 <NavigationContainer>
-                    <NewsStack />
+                    <Header/>
+                    <NewsTabs />
                 </NavigationContainer>
             </Provider>
         )

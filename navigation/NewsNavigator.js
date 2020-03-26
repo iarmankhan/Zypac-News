@@ -4,13 +4,13 @@ import NewsScreen from "../screens/News/News.screen";
 import NewsDetailScreen from "../screens/NewsDetail/NewsDetail.screen";
 import Colors from "../constants/Colors";
 
-const NewsStack = () => {
+const NewsStack = ({id}) => {
     const Stack = createStackNavigator();
     return (
         <Stack.Navigator
             initialRouteName="Home"
             screenOptions={{
-                // headerShown: false,
+                headerShown: false,
                 gestureEnabled: true,
                 gestureDirection: 'horizontal',
                 headerStyle: {
@@ -25,7 +25,7 @@ const NewsStack = () => {
             headerMode="float"
         >
             <Stack.Screen name="Home" options={{title: 'Zypac News'}} >
-                {(props) => <NewsScreen {...props} />}
+                {(props) => <NewsScreen {...props} id={id} />}
             </Stack.Screen>
             <Stack.Screen name="NewsDetails" options={{title: ''}} component={NewsDetailScreen} />
         </Stack.Navigator>

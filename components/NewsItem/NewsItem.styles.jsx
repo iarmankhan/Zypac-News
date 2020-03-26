@@ -2,9 +2,10 @@ import {StyleSheet} from "react-native";
 
 export const newsItemStyles = StyleSheet.create({
     newsItem: {
-        height: 150,
-        marginHorizontal: 20,
-        marginVertical: 10
+        height: 140,
+        marginHorizontal: 10,
+        overflow: 'hidden',
+        marginVertical: 8
     },
     main: {
         flexDirection: 'row'
@@ -34,9 +35,11 @@ export const newsItemStyles = StyleSheet.create({
     title: {
         fontSize: 18,
         marginVertical: 2,
+        marginRight: 25,
         fontWeight: "bold"
     },
     excerpt: {
-        marginRight: 10
+        marginRight: 30,
+        marginTop: 10
     },
 });

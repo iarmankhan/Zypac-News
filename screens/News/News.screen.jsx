@@ -8,6 +8,28 @@ import {selectLatestNews} from "../../store/News/News.selectors";
 import {newsStyles} from "./News.styles";
 import NewsItem from "../../components/NewsItem/NewsItem.component";
 
+import {useFocusEffect} from '@react-navigation/native';
+
+/**
+ * @return {null}
+ */
+function LoadNewsOnFocus({isLoading, isRefreshing, loadingNews, isVisible}) {
+    useFocusEffect(
+        React.useCallback(() => {
+            // console.log({isRefreshing, isLoading})
+            if (!isLoading && !isRefreshing) {
+                loadingNews()
+                console.log("Screen changed")
+            }
+
+            return () => {
+            };
+        }, [])
+    );
+
+    return null;
+}
+
 class NewsScreen extends Component {
     constructor(props) {
         super(props);
@@ -16,6 +38,8 @@ class NewsScreen extends Component {
             isLoading: false,
             isRefreshing: false,
             error: null,
+            isFirstTime: true,
+            isVisible: true
         };
 
         this.loadNews = this.loadNews.bind(this);
@@ -24,7 +48,7 @@ class NewsScreen extends Component {
     }
 
     async loadNews() {
-        this.setState({error: null, isRefreshing: true});
+        this.setState({error: null, isRefreshing: true, isVisible: true});
 
         const {fetchNews} = this.props;
 
@@ -33,11 +57,12 @@ class NewsScreen extends Component {
         } catch (e) {
             this.setState({error: e.message});
         }
-        this.setState({isRefreshing: false})
+        this.setState({isRefreshing: false, isVisible: false})
     }
 
     componentDidMount() {
         this.loadingNews();
+        this.setState({isFirstTime: false})
     }
 
     loadingNews() {
@@ -54,7 +79,7 @@ class NewsScreen extends Component {
     }
 
     render() {
-        const {error, isLoading, isRefreshing} = this.state;
+        const {error, isLoading, isRefreshing, isVisible, isFirstTime} = this.state;
         const {news} = this.props;
         if (error) {
             return (
@@ -83,21 +108,50 @@ class NewsScreen extends Component {
         }
 
         return (
-            <View>
-                <FlatList
-                    refreshing={isRefreshing}
-                    onRefresh={this.loadNews}
-                    data={news}
-                    renderItem={itemData => (
-                        <NewsItem
-                            image={itemData.item.image}
-                            title={itemData.item.title}
-                            excerpt={itemData.item.excerpt}
-                            onSelect={() => this.selectNewsHandler(itemData.item.id)}
-                        />
-                    )}
-                    keyExtractor={item => item.id.toString()}
+            <View style={newsStyles.centered}>
+                <LoadNewsOnFocus
+                    isLoading={isLoading}
+                    isRefreshing={isRefreshing}
+                    loadingNews={this.loadNews}
+                    isVisible={isVisible}
                 />
+                {
+                    isFirstTime
+                        ?
+                        <FlatList
+                            refreshing={isRefreshing}
+                            onRefresh={this.loadNews}
+                            data={news}
+                            renderItem={itemData => (
+                                <NewsItem
+                                    image={itemData.item.image}
+                                    title={itemData.item.title}
+                                    excerpt={itemData.item.excerpt}
+                                    onSelect={() => this.selectNewsHandler(itemData.item.id)}
+                                />
+                            )}
+                            keyExtractor={item => item.id.toString()}
+                        />
+                        :
+                        isVisible
+                            ?
+                            <ActivityIndicator size="large" color={Colors.primary} />
+                            :
+                            <FlatList
+                                refreshing={isRefreshing}
+                                onRefresh={this.loadNews}
+                                data={news}
+                                renderItem={itemData => (
+                                    <NewsItem
+                                        image={itemData.item.image}
+                                        title={itemData.item.title}
+                                        excerpt={itemData.item.excerpt}
+                                        onSelect={() => this.selectNewsHandler(itemData.item.id)}
+                                    />
+                                )}
+                                keyExtractor={item => item.id.toString()}
+                            />
+                }
             </View>
         )
     }
@@ -107,8 +161,8 @@ const mapStateToProps = createStructuredSelector({
     news: selectLatestNews
 });
 
-const mapDispatchToProps = (dispatch) => ({
-    fetchNews: news => dispatch(fetchNews(news))
+const mapDispatchToProps = (dispatch, ownProps) => ({
+    fetchNews: () => dispatch(fetchNews(ownProps.id))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewsScreen)

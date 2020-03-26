@@ -3,12 +3,11 @@ import News from "../../models/News";
 export const SET_NEWS = 'SET_NEWS';
 
 export const fetchNews = (id) => {
-    console.log(`https://zypacinfotech.com/wptest/wp-json/wp/v2/posts?embed&categories=${id}`)
     if(id === undefined)    id = 1;
 
     return async dispatch => {
         try {
-            const response = await fetch(`https://zypacinfotech.com/wptest/wp-json/wp/v2/posts?embed&categories=${id}`);
+            const response = await fetch(`https://zypacinfotech.com/app/wp-json/wp/v2/posts?embed&categories=${id}`);
 
             if(!response.ok){
                 throw new Error("Something went wrong!");
@@ -30,7 +29,7 @@ export const fetchNews = (id) => {
             })
 
         } catch (e) {
-
+            throw new Error("Something went wrong!");
         }
     };
 };

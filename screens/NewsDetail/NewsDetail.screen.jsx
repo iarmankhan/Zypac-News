@@ -5,7 +5,11 @@ import {connect} from "react-redux";
 import HtmlView from "../../components/UI/HtmlView";
 import {newsDetailStyles} from "./NewsDetail.styles";
 
-const NewsDetailScreen = ({newsItem: {title, image, content}}) => {
+const NewsDetailScreen = ({newsItem}) => {
+    if(newsItem === undefined){
+        return null
+    }
+    const {title, image, content} = newsItem;
     return (
         <ScrollView>
             <Image source={{uri: image}} style={newsDetailStyles.image}/>
